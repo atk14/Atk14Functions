@@ -3,7 +3,7 @@
         "type": "library",
         "description": "Functions used in the ATK14 Framework",
         "keywords": ["atk14"],
-        "homepage": "https://github.com/atk14/Functions",
+        "homepage": "https://github.com/atk14/Atk14Functions",
         "license": ["MIT"],
         "authors": [
                 {
