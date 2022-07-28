@@ -13,8 +13,14 @@ if(!defined("_ATK14_FUNCTIONS_LOADED_") && !function_exists("EasyReplace")){
  *	@return	strig
  */
 function EasyReplace($str,$replaces){
-	settype($replaces,"array");
-	return str_replace(array_keys($replaces),array_values($replaces),$str);
+	$str = (string)$str;
+	$replaces = (array)$replaces;
+	if(!sizeof($replaces)){ return $str; }
+	$keys = array_keys($replaces);
+	$values = array_values($replaces);
+	$keys = array_map(function($item){ return (string)$item; },$keys);
+	$values = array_map(function($item){ return (string)$item; },$values);
+	return str_replace($keys,$values,$str);
 }
 
 /**
@@ -160,6 +166,25 @@ if (!function_exists('array_column')) {
 	}
 }
 
+/**
+ * Replacement for built-in function assert()
+ *
+ * Function assert() turned to language construct in PHP 7 and has no effect in production environment.
+ */
+function myAssert($expression,$message = ""){
+	if(!$expression){
+		$file = $line = "???";
+		$ar = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT,1);
+		if($ar){
+			$file = $ar[0]["file"];
+			$line = $ar[0]["line"];
+		}
+
+		$message = $message ? $message : "Assertion";
+		$msg = sprintf("myAssert(): %s failed in %s on line %d",$message,$file,$line);
+		throw new Exception($msg);
+	}
+}
 
 define("_ATK14_FUNCTIONS_LOADED_",__FILE__);
 }
