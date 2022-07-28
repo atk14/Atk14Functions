@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+[1.0.3] - 2022-07-28
+--------------------
+
+- Added function myAssert()
+
 [1.0.2] - 2019-09-16
 --------------------
 
